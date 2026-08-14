@@ -8,7 +8,7 @@ O que tem no notebook
 
 O arquivo Exercícios_Python__AmandaBarreto__Turma_A__Período_6_.ipynb contém os 50 exercícios em ordem. 
 
-<details> <summary>Lista completa dos exercícios</summary>
+
 #	Exercício
 1	Imprimir "Hello, World!" no console
 2	Somar dois números digitados pelo usuário
