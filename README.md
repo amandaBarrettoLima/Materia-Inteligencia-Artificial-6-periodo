@@ -246,6 +246,48 @@ Nesses notebooks são praticadas as etapas típicas de um projeto de classifica�
 
 ---
 
+Atividade complementar — AutoML: FLAML x Auto-Sklearn
+
+Arquivo: AutoML (FLAML vs Auto Sklearn) com o Dataset Iris [Amanda Barreto 6A].ipynb
+
+Atividade prática de Automated Machine Learning (AutoML), com o notebook Comparação de AutoML (FLAML vs. Auto-Sklearn) com o Dataset Iris. O notebook compara duas ferramentas, o FLAML e o Auto-Sklearn, no conjunto de dados clássico Iris, avaliando desempenho, tempo de execução e complexidade da busca de modelos.
+
+O que foi feito
+Dados: Iris (150 amostras, 4 variáveis numéricas, 3 classes), com divisão 80/20 estratificada e random_state=42 (120 amostras de treino e 30 de teste). As linhas duplicadas do dataset foram mantidas.
+Configuração justa: os dois frameworks receberam o mesmo orçamento de tempo (60 s), a mesma semente e o mesmo paralelismo (n_jobs=1), usando exatamente a mesma divisão de dados.
+FLAML: time_budget=60, métrica de acurácia e busca entre lgbm, rf, extra_tree, xgboost e lrl1.
+Auto-Sklearn: time_left_for_this_task=60 e per_run_time_limit=10.
+Avaliação: acurácia, classification_report e matriz de confusão dos dois modelos.
+Custo computacional: tempo real de execução, número de configurações avaliadas e pico de memória (medido por amostragem com psutil).
+Inspeção dos modelos: melhor estimador e hiperparâmetros no FLAML; leaderboard() e show_models() no Auto-Sklearn.
+Estrutura do notebook
+
+Segue o mesmo padrão dos demais notebooks do repositório (seções numeradas e interpretação ao final):
+
+Instalando e importando bibliotecas
+Carregando o dataset e análise dos dados
+Transformação numérica
+Divisão X e y, treino e teste
+FLAML (com time_budget)
+Auto-Sklearn (Python 3.9 em ambiente separado)
+Previsões e avaliação (acurácia e classification_report)
+Matriz de confusão
+Comparação final: desempenho e custo computacional
+Interpretações e análises
+Resultados de uma execução no Google Colab
+Framework	Acurácia (teste)	Erros	Tempo real (s)	Configurações avaliadas	Pico de memória (MB)	Modelo escolhido
+FLAML	1,0000	0	60,05	6	684,9	lrl1 (regressão logística com L1)
+Auto-Sklearn	0,9667	1	54,67	21	435,1	ensemble de 12 modelos
+
+Os valores variam entre execuções, pois a busca depende do tempo e do hardware. Em outra execução com a mesma semente, os dois frameworks empataram com 96,67% de acurácia. O pico de memória do FLAML inclui o processo do notebook, então ele serve como ordem de grandeza e não como comparação exata.
+
+Principais conclusões
+Desempenho: os dois ficaram praticamente empatados. No conjunto de teste do Iris, com apenas 30 amostras, cada erro vale cerca de 3,3 pontos percentuais, então uma diferença de uma amostra não permite concluir que um framework seja superior ao outro. O único erro observado foi versicolor classificada como virginica.
+Custo computacional: o Auto-Sklearn explorou bem mais configurações no mesmo tempo (21 contra 6), enquanto o FLAML usou todo o orçamento avaliando poucas configurações. O Auto-Sklearn também exigiu um ambiente separado com Python 3.9.
+Interpretabilidade: o FLAML entrega um único modelo, mais simples de inspecionar e explicar. O Auto-Sklearn gera um ensemble ponderado com vários pré-processadores e algoritmos, que expõe mais detalhes do pipeline, mas é mais difícil de explicar.
+
+---
+
 ## Tecnologias utilizadas
 
 **Linguagem**
